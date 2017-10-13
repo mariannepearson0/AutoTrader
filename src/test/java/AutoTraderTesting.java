@@ -125,16 +125,57 @@ public class AutoTraderTesting {
     public void getEvaulation(){fail("Not yet implemented");}
 
     @Test
-    public void bikeFinance(){fail("Not yet implemented");}
+    public void bikeFinance(){
+        ExtentTest biketest = report.createTest("bikeTest");
+        HomePage hp = PageFactory.initElements(webDriver, HomePage.class);
+        hp.clickBikes();
+        Bikes bike = PageFactory.initElements(webDriver, Bikes.class);
+        Actions builder = new Actions(webDriver);
+        builder.moveToElement(bike.getBikeReviews()).perform();
+        builder.moveToElement(bike.getBestBike()).click().perform();
+        BestBikes bb = PageFactory.initElements(webDriver, BestBikes.class);
+        try{
+            assertTrue(bb.getBestBike().contains("Triumph Street"));
+            biketest.log(Status.PASS, "The user is able to navigate to the bike awards section and identify the best bike");
+            biketest.info("Using mouse hower and moving by offset the mouse can navigate a drop down menu and select the item" +
+                    "required. It goes to the best bikes section and does a text match to make sure it returns the string" +
+                    "matching the best bike.");
+        }catch(AssertionError e){
+            Assert.fail();
+            biketest.log(Status.FAIL, "The test has failed, maybe the Triumph Street Triple is no longer the best bike" +
+                    " or the navigation isn't working.");
+        }
+    }
 
     @Test
-    public void localDealers(){fail("Not yet implemented");}
+    public void localDealers(){
+        ExtentTest dealertest = report.createTest("bikeTest");
+        HomePage hp = PageFactory.initElements(webDriver, HomePage.class);
+        hp.clickDealers();
+        Dealers d = PageFactory.initElements(webDriver, Dealers.class);
+        d.sendPostcode();
+        d.dealerSearch();
+        DealerSearch ds = PageFactory.initElements(webDriver, DealerSearch.class);
+        try{
+            assertTrue(ds.getDealerInfo().contains("OX28 1QT"));
+            dealertest.log(Status.PASS, "The user is able to search for dealers using their postcode");
+            dealertest.info("Navigate to the search for dealers page and enter a postcode, check that the information in the " +
+                    "first record returnes contains that postcode.");
+        }catch(AssertionError e){
+            Assert.fail();
+        }
+
+    }
 
     @Test
-    public void editAccount(){fail("Not yet implemented");}
+    public void editAccount(){
+        //Ideally need visual recognition software to carry out.
+        fail("Not yet implemented");
+    }
 
     @Test
     public void readReview(){
+        //Will not recognise this as an element, tried EVERYTHING!
         HomePage hp = PageFactory.initElements(webDriver, HomePage.class);
         hp.clickSkoda();
     }

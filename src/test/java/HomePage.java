@@ -15,8 +15,14 @@ public class HomePage {
     @FindBy(linkText="Careers")
     private WebElement careersClick;
 
-    @FindBy(css = "#js-editorial-placeholder > div > div > div.editorial__nav-main-image")
+    @FindBy(css = "[href = '/content/car-reviews/skoda-rapid-review-hatchback-2017']")
     private WebElement skodaReview;
+
+    @FindBy(css="#js-channel-nav > ul.other-vehicles__list > li:nth-child(4) > a")
+    private WebElement bikes;
+
+    @FindBy(css = "body > main > div > section.is-non-critical > section.alt-search__nav.t-row > a:nth-child(3) > figure")
+    private WebElement localDealers;
 
     public void clickSignIn(){
         signInButton.click();
@@ -32,6 +38,14 @@ public class HomePage {
 
     public void clickSkoda(){
         skodaReview.click();
+    }
+
+    public void clickBikes(){
+        bikes.click();
+    }
+
+    public void clickDealers(){
+        localDealers.click();
     }
 }
 
